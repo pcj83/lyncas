@@ -1,1 +1,9 @@
-spring.application.name=demo
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/contasapagar
+    username: seu_usuario
+    password: sua_senha
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    enabled: true
+    locations: classpath:db/migration

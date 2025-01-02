@@ -1,7 +1,8 @@
-version: '3.8'
 services:
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     environment:
@@ -10,11 +11,20 @@ services:
       - SPRING_DATASOURCE_PASSWORD=postgres
     depends_on:
       - db
+    volumes:
+      - .:/app
+    command: >
+      sh -c "mvn clean package -DskipTests &&
+             java -jar target/demo-0.0.1-SNAPSHOT.jar"
   db:
-    image: postgres:14
+    image: bitnami/postgresql
+    container_name: lyncas-db
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: contas
+    volumes:
+      - .docker/volumes/postgres:/bitnami/postgresql
     ports:
-      - "5432:5432"
+      - "5434:5434"
+    restart: always

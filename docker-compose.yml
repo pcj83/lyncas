@@ -1,12 +1,12 @@
 services:
   app:
     build:
-      context: .
+      context: src/main/java
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/contas
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5434/contas
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
     depends_on:

@@ -5,6 +5,7 @@ import com.paulocezarjr.contasapagar.dto.ContaCreateDTO;
 import com.paulocezarjr.contasapagar.dto.ContaResponseDTO;
 import com.paulocezarjr.contasapagar.dto.ContaUpdateDTO;
 import com.paulocezarjr.contasapagar.mapper.ContaMapper;
+import com.paulocezarjr.contasapagar.observer.ContaObserver;
 import com.paulocezarjr.contasapagar.observer.ContaSubject;
 import com.paulocezarjr.contasapagar.repository.ContaRepository;
 import com.paulocezarjr.contasapagar.service.ContaService;
@@ -70,5 +71,14 @@ public class ContaServiceImpl implements ContaService {
     public BigDecimal obterValorTotalPagoPorPeriodo(LocalDate inicio, LocalDate fim) {
         return contaRepository.obterValorTotalPagoPorPeriodo(inicio, fim)
                 .orElse(BigDecimal.ZERO);
+    }
+    @Override
+    public void addObserver(ContaObserver observer) {
+        contaSubject.addObserver(observer);
+    }
+
+    @Override
+    public void removeObserver(ContaObserver observer) {
+        contaSubject.removeObserver(observer);
     }
 }

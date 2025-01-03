@@ -3,6 +3,7 @@ package com.paulocezarjr.contasapagar.service;
 import com.paulocezarjr.contasapagar.dto.ContaCreateDTO;
 import com.paulocezarjr.contasapagar.dto.ContaResponseDTO;
 import com.paulocezarjr.contasapagar.dto.ContaUpdateDTO;
+import com.paulocezarjr.contasapagar.observer.ContaObserver;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -22,4 +23,7 @@ public interface ContaService {
     ContaResponseDTO obterContaPorId(Long id);
 
     BigDecimal obterValorTotalPagoPorPeriodo(LocalDate inicio, LocalDate fim);
+
+    void addObserver(ContaObserver observer);
+    void removeObserver(ContaObserver observer);
 }
